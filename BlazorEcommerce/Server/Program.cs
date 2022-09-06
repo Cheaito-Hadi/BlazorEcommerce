@@ -1,7 +1,9 @@
 global using Microsoft.EntityFrameworkCore;
 global using BlazorEcommerce.Shared;
-global using BlazorEcommerce.Server.Services.CategoryService;
+<<<<<<< HEAD
+=======
 global using BlazorEcommerce.Server.Services.ProductService;
+>>>>>>> parent of 7d1ac97 (Every thing before Product Variants)
 global using BlazorEcommerce.Server.Data;
 using Microsoft.AspNetCore.ResponseCompression;
 
@@ -19,9 +21,11 @@ builder.Services.AddRazorPages();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+<<<<<<< HEAD
+=======
 builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
 
+>>>>>>> parent of 7d1ac97 (Every thing before Product Variants)
 var app = builder.Build();
 
 app.UseSwaggerUI();

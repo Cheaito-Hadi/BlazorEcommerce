@@ -1,4 +1,4 @@
-﻿ using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlazorEcommerce.Server.Controllers
@@ -7,32 +7,27 @@ namespace BlazorEcommerce.Server.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IProductService _productService;
-        public ProductController(IProductService productService)
+        private readonly DataContext _context;
+        public ProductController(DataContext context)
         {
-            _productService = productService;
+            _context = context;
         }
       
         [HttpGet]
-        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProducts()
+        public async Task<IActionResult> GetProduct()
         {
-            var result = await _productService.GetProductsAsync();
-            return Ok(result);
+            var products = await _context.Products.ToListAsync();
+            return Ok(products);
         }
+<<<<<<< HEAD
+=======
         [HttpGet("{productId}")]
         public async Task<ActionResult<ServiceResponse<Product>>> GetProduct(int productId)
         {
             var result = await _productService.GetProductAsync(productId);
             return Ok(result);
         }
-        [HttpGet("category/{categoryUrl}")]
-        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProductsByCategory(string categoryUrl)
-        {
-            var result = await _productService.GetProductsByCategory(categoryUrl);
-            return Ok(result);
-        }
-
-
+>>>>>>> parent of 7d1ac97 (Every thing before Product Variants)
     }
 }
 
