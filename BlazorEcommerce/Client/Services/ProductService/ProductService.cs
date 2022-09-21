@@ -25,19 +25,30 @@
 
         public async Task GetProducts(string? categoryUrl = null)
         {
-            var result = categoryUrl == null ?
-                await _http.GetFromJsonAsync<ServiceResponse<List<Product>>>("api/product/featured") :
-                await _http.GetFromJsonAsync<ServiceResponse<List<Product>>>($"api/product/category/{categoryUrl}");
-            if (result != null && result.Data != null)
-                Products = result.Data;
+            try
+            {
 
-            CurrentPage = 1;
-            PageCount = 0;
 
-            if (Products.Count == 0)
-                Message = "No products found";
+                var result = categoryUrl == null ?
+                    await _http.GetFromJsonAsync<ServiceResponse<List<Product>>>("api/product/featured") :
+                    await _http.GetFromJsonAsync<ServiceResponse<List<Product>>>($"api/product/category/{categoryUrl}");
+                if (result != null && result.Data != null)
+                    Products = result.Data;
 
-            ProductsChanged.Invoke();
+                CurrentPage = 1;
+                PageCount = 0;
+
+                if (Products.Count == 0)
+                    Message = "No products found";
+
+                ProductsChanged.Invoke();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         public async Task<List<string>> GetProductSearchSuggestions(string searchText)
